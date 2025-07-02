@@ -1,209 +1,53 @@
+
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Vendor Profile</title>
+  <title>Swypa | Marketplace</title>
   <link rel="stylesheet" href="style.css" />
   <style>
-    body {
-      margin: 0;
-      font-family: 'Inter', sans-serif;
-      background-color: #0f0f0f;
-      color: #f1f1f1;
-    }
-
-    .vendor-header {
-      display: flex;
-      align-items: center;
-      padding: 2rem;
-      background-color: #141414;
-      border-bottom: 1px solid #2b2b2b;
-    }
-
-    .vendor-avatar {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      margin-right: 1.5rem;
-    }
-
-    .vendor-meta h1 {
-      font-size: 2rem;
-      margin-bottom: 0.5rem;
-    }
-
-    .vendor-meta .verified-badge {
-      background: #1e90ff;
-      color: #fff;
-      font-size: 0.9rem;
-      padding: 0.2rem 0.6rem;
-      border-radius: 8px;
-      margin-left: 0.5rem;
-    }
-
-    .vendor-rating, .vendor-info {
-      color: #ccc;
-      margin: 0.25rem 0;
-    }
-
-    .follow-btn, .report-btn {
-      margin-top: 1rem;
-      margin-right: 1rem;
-    }
-
-    button {
-      padding: 0.75rem 1.4rem;
-      border: none;
-      border-radius: 12px;
-      font-weight: 600;
-      cursor: pointer;
-      font-size: 1rem;
-      transition: all 0.3s ease;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.3);
-    }
-
-    .primary-btn {
-      background-color: #00d4a0;
-      color: #0f0f0f;
-    }
-
-    .primary-btn:hover {
-      background-color: #00e5b2;
-      transform: translateY(-2px);
-    }
-
-    .secondary-btn {
-      background-color: transparent;
-      border: 2px solid #00d4a0;
-      color: #00d4a0;
-    }
-
-    .secondary-btn:hover {
-      background-color: #00d4a011;
-    }
-
-    .danger-btn {
-      background-color: #ff4d4f;
-      color: #fff;
-    }
-
-    .danger-btn:hover {
-      background-color: #ff6668;
-    }
-
-    .vendor-products, .vendor-reviews {
-      padding: 2rem;
-    }
-
-    .product-grid {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
-
-    .product-card {
-      background: #1a1a1a;
-      border: 1px solid #2b2b2b;
-      padding: 1rem;
-      border-radius: 12px;
-      width: 240px;
-      text-align: center;
-    }
-
-    .product-card img {
-      width: 100%;
-      border-radius: 10px;
-      margin-bottom: 0.5rem;
-    }
-
-    .product-card h3 {
-      font-size: 1.1rem;
-      color: #f1f1f1;
-      margin: 0.5rem 0;
-    }
-
-    .product-card p {
-      color: #00d4a0;
-      margin-bottom: 0.5rem;
-    }
-
-    .product-card a {
-      display: inline-block;
-      margin-top: 0.5rem;
-      text-decoration: none;
-      color: #00d4a0;
-    }
-
-    .upload-trigger {
-      text-align: center;
-      margin: 2rem;
-    }
-
-    .upload-trigger input[type="file"] {
+    .section {
       display: none;
     }
-
-    .upload-trigger label {
-      background: #00d4a0;
-      color: #0f0f0f;
-      font-weight: bold;
-      font-size: 1.1rem;
-      padding: 1rem 2rem;
-      border-radius: 14px;
-      border: none;
-      cursor: pointer;
-    }
-
-    .vendor-reviews .review {
-      background-color: #1e1e1e;
-      padding: 1rem;
-      margin-bottom: 1rem;
-      border-radius: 10px;
-    }
-
-    .review-form {
-      background-color: #1a1a1a;
-      padding: 1.5rem;
-      margin: 2rem auto;
-      border-radius: 12px;
-      width: 90%;
-      max-width: 600px;
-      opacity: 0.5;
-      pointer-events: none;
-    }
-
-    .review-form.disabled::before {
-      content: 'You must be a verified buyer to leave a review.';
+    .section.active {
       display: block;
-      color: #ff6f61;
-      font-weight: bold;
-      margin-bottom: 1rem;
-    }
-
-    .review-form h3 {
-      margin-bottom: 1rem;
-      color: #f1f1f1;
-    }
-
-    .review-form textarea {
-      width: 100%;
-      height: 100px;
-      padding: 1rem;
-      font-size: 1rem;
-      border-radius: 10px;
-      border: none;
-      margin-bottom: 1rem;
-      background: #2a2a2a;
-      color: #f1f1f1;
-    }
-
-    .review-form button {
-      width: 100%;
     }
   </style>
 </head>
 <body>
-  <main class="vendor-profile">
+  <!-- Login Page -->
+  <section class="section login-section active" id="login">
+    <h1>Welcome to Swypa</h1>
+    <p>Buy, sell & showcase your hustle with ease.</p>
+    <button class="primary-btn" onclick="showSection('home')">Sign in with Google</button>
+    <p class="or">or</p>
+    <input type="email" placeholder="Email">
+    <input type="password" placeholder="Password">
+    <button class="primary-btn" onclick="showSection('home')">Login</button>
+    <p class="browse-note">You can browse as guest, but interactions require login.</p>
+  </section>
+
+  <!-- Home Feed -->
+  <section class="section home-feed" id="home">
+    <h2>Popular Products</h2>
+    <div class="product-grid">
+      <div class="product-card">
+        <img src="https://via.placeholder.com/250x200" alt="Product 1">
+        <h3>Noise Cancelling Headphones</h3>
+        <p>KSh 5,000</p>
+        <button onclick="showSection('vendor')">View Vendor</button>
+      </div>
+      <div class="product-card">
+        <img src="https://via.placeholder.com/250x200" alt="Product 2">
+        <h3>Wireless Earbuds</h3>
+        <p>KSh 2,200</p>
+        <button onclick="showSection('vendor')">View Vendor</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Vendor Profile -->
+  <main class="section vendor-profile" id="vendor">
     <section class="vendor-header">
       <img src="https://via.placeholder.com/120" alt="Vendor avatar" class="vendor-avatar" />
       <div class="vendor-meta">
@@ -227,13 +71,13 @@
           <img src="https://via.placeholder.com/250x200" alt="Product 1">
           <h3>Noise Cancelling Headphones</h3>
           <p>KSh 5,000</p>
-          <a href="product-detail.html">View</a>
+          <a href="#">View</a>
         </div>
         <div class="product-card">
           <img src="https://via.placeholder.com/250x200" alt="Product 2">
           <h3>Wireless Earbuds</h3>
           <p>KSh 2,200</p>
-          <a href="product-detail.html">View</a>
+          <a href="#">View</a>
         </div>
       </div>
     </section>
@@ -254,5 +98,14 @@
       </div>
     </section>
   </main>
+
+  <script>
+    function showSection(id) {
+      document.querySelectorAll('.section').forEach(section => {
+        section.classList.remove('active');
+      });
+      document.getElementById(id).classList.add('active');
+    }
+  </script>
 </body>
 </html>
