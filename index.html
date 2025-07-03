@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -11,12 +12,14 @@
       color: #f0f0f0;
       margin: 0;
       padding: 0;
+      scroll-behavior: smooth;
     }
     h2 {
       font-size: 1.8rem;
       margin-bottom: 1rem;
       border-bottom: 2px solid #00d4a0;
       padding-bottom: 0.5rem;
+      animation: fadeInDown 0.6s ease-in-out;
     }
     h3 {
       font-size: 1.2rem;
@@ -26,6 +29,7 @@
     .section {
       display: none;
       padding: 2rem 1rem;
+      animation: fadeIn 0.5s ease-in-out;
     }
     .section.active {
       display: block;
@@ -43,6 +47,7 @@
     .primary-btn {
       background-color: #00d4a0;
       color: #0f0f0f;
+      transition: background-color 0.3s ease, transform 0.2s ease;
     }
     .primary-btn:hover {
       background-color: #00e5b2;
@@ -69,6 +74,7 @@
     .danger-btn {
       background-color: #ff4d4f;
       color: #fff;
+      transition: background-color 0.3s ease;
     }
     .danger-btn:hover {
       background-color: #ff6668;
@@ -82,6 +88,7 @@
       font-size: 1rem;
       background: #1e1e1e;
       color: #f0f0f0;
+      transition: outline 0.3s ease;
     }
     input:focus, select:focus, textarea:focus {
       outline: 2px solid #00d4a0;
@@ -91,6 +98,7 @@
     }
     ul li {
       margin-bottom: 0.75rem;
+      animation: fadeInUp 0.4s ease-in-out;
     }
     label {
       display: block;
@@ -104,6 +112,7 @@
       border-radius: 12px;
       max-width: 600px;
       margin: 2rem auto;
+      animation: slideInUp 0.5s ease-in-out;
     }
     @media screen and (max-width: 600px) {
       .booking-form, .delivery-form, .checkout-form {
@@ -112,6 +121,23 @@
       h2 {
         font-size: 1.5rem;
       }
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
+    @keyframes fadeInDown {
+      from {opacity: 0; transform: translateY(-20px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+    @keyframes fadeInUp {
+      from {opacity: 0; transform: translateY(20px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+    @keyframes slideInUp {
+      from {opacity: 0; transform: translateY(40px);}
+      to {opacity: 1; transform: translateY(0);}
     }
   </style>
 </head>
@@ -126,6 +152,8 @@
     <button class="primary-btn" onclick="showSection('rating')">Vendor Rating</button>
     <button class="primary-btn" onclick="showSection('filter')">Category Filter</button>
     <button class="primary-btn" onclick="showSection('agriculture')">Agri-Market</button>
+    <button class="primary-btn" onclick="showSection('verifySeller')">Verify Seller</button>
+<button class="primary-btn" onclick="showSection('delivery')">Book Delivery</button>
   </section>
 
   <!-- Top Nav with Profile Icon & Cart -->
@@ -206,6 +234,7 @@
       <p><strong>Role:</strong> Vendor</p>
     </div>
   </div>
+</section>
   <!-- Wishlist Section -->
 <section class="section" id="wishlist">
   <h2>Your Wishlist</h2>
@@ -223,6 +252,7 @@
   </div>
   <button class="secondary-btn" onclick="showSection('home')">← Back</button>
 </section>
+  
   <!-- Category Filter Section -->
 <section class="section" id="filter">
   <h2>Filter by Category</h2>
@@ -368,7 +398,7 @@ function filterCategory() {
       : '<em>No items in this category.</em>';
   }
 }
-    }
+    
     function submitVerification() {
   const name = document.getElementById('bizName').value;
   const desc = document.getElementById('description').value;
