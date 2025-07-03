@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -16,11 +17,6 @@
       margin-bottom: 1rem;
       border-bottom: 2px solid #00d4a0;
       padding-bottom: 0.5rem;
-    }
-    h3 {
-      font-size: 1.2rem;
-      margin-top: 2rem;
-      margin-bottom: 0.75rem;
     }
     .section {
       display: none;
@@ -43,34 +39,14 @@
       background-color: #00d4a0;
       color: #0f0f0f;
     }
-    .primary-btn:hover {
-      background-color: #00e5b2;
-      transform: translateY(-2px);
-    }
     .secondary-btn {
       background-color: #1e1e1e;
       color: #ffffff;
       border: 1px solid #444;
-      padding: 0.6rem 1.2rem;
-      border-radius: 10px;
-      font-weight: 500;
-      font-size: 0.95rem;
-      letter-spacing: 0.5px;
-      transition: all 0.3s ease;
-      margin-top: 1rem;
-    }
-    .secondary-btn:hover {
-      background-color: #2a2a2a;
-      color: #00d4a0;
-      border-color: #00d4a0;
-      transform: translateY(-1px);
     }
     .danger-btn {
       background-color: #ff4d4f;
       color: #fff;
-    }
-    .danger-btn:hover {
-      background-color: #ff6668;
     }
     input, select, textarea {
       width: 100%;
@@ -82,210 +58,106 @@
       background: #1e1e1e;
       color: #f0f0f0;
     }
-    input:focus, select:focus, textarea:focus {
-      outline: 2px solid #00d4a0;
-    }
-    ul {
-      padding-left: 1.2rem;
-    }
-    ul li {
-      margin-bottom: 0.75rem;
-    }
-    label {
-      display: block;
-      margin-bottom: 0.25rem;
-      font-weight: 600;
-      color: #cccccc;
-    }
-    .booking-form, .delivery-form, .checkout-form {
-      background-color: #1a1a1a;
-      padding: 2rem;
-      border-radius: 12px;
-      max-width: 600px;
-      margin: 2rem auto;
-    }
-    @media screen and (max-width: 600px) {
-      .booking-form, .delivery-form, .checkout-form {
-        padding: 1.2rem;
-      }
-      h2 {
-        font-size: 1.5rem;
-      }
-    }
   </style>
 </head>
 <body>
 
-  <section class="section active" id="home">
-    <h2>Welcome to Swypa</h2>
-    <p>Scroll to discover hot deals, local services, and more.</p>
-    <button class="primary-btn" onclick="showSection('checkout')">Checkout</button>
-    <button class="primary-btn" onclick="showSection('profile')">Profile</button>
-    <button class="primary-btn" onclick="showSection('wishlist')">Wishlist</button>
-    <button class="primary-btn" onclick="showSection('rating')">Vendor Rating</button>
-    <button class="primary-btn" onclick="showSection('filter')">Category Filter</button>
-    <button class="primary-btn" onclick="showSection('agriculture')">Agri-Market</button>
- <section class="checkout-form section" id="checkout">
+<section class="section active" id="home">
+  <h2>Welcome to Swypa</h2>
+  <p>Scroll to discover hot deals, local services, and more.</p>
+  <button class="primary-btn" onclick="showSection('checkout')">Checkout</button>
+  <button class="primary-btn" onclick="showSection('profile')">Profile</button>
+  <button class="primary-btn" onclick="showSection('wishlist')">Wishlist</button>
+  <button class="primary-btn" onclick="showSection('rating')">Vendor Rating</button>
+  <button class="primary-btn" onclick="showSection('filter')">Category Filter</button>
+  <button class="primary-btn" onclick="showSection('agriculture')">Agri-Market</button>
+</section>
+
+<section class="section" id="checkout">
   <h2>Checkout</h2>
   <input type="text" placeholder="Full Name">
   <input type="text" placeholder="Shipping Address">
   <input type="text" placeholder="Phone Number">
   <button class="primary-btn" onclick="placeOrder()">Place Order</button>
-  <div id="orderMessage" style="margin-top:1rem;color:#00d4a0;font-weight:600;"></div>
+  <div id="orderMessage"></div>
   <button class="secondary-btn" onclick="showSection('home')">← Back</button>
 </section>
 
-<!-- Profile -->
-<section class="booking-form section" id="profile">
+<section class="section" id="profile">
   <h2>Your Profile</h2>
-  <label>Name:</label>
-  <input type="text" id="profileName" value="Alex Mwangi">
-  <label>Email:</label>
-  <input type="email" id="profileEmail" value="alex@swypa.co.ke">
-  <label>Account Type:</label>
+  <input type="text" id="profileName" placeholder="Name">
+  <input type="email" id="profileEmail" placeholder="Email">
   <select id="profileType">
-    <option value="Vendor" selected>Vendor</option>
+    <option value="Vendor">Vendor</option>
     <option value="Customer">Customer</option>
   </select>
-  <h3>Activity</h3>
-  <ul>
-    <li>Uploaded: Wireless Earbuds</li>
-    <li>Booking: Tattoo session – July 10</li>
-    <li>Review: “Fast delivery 🔥”</li>
-  </ul>
-  <button class="primary-btn" onclick="saveProfile()">Save Changes</button>
-  <div id="profileMessage" style="margin-top:1rem;color:#00d4a0;font-weight:600;"></div>
+  <button class="primary-btn" onclick="saveProfile()">Save</button>
+  <div id="profileMessage"></div>
   <button class="secondary-btn" onclick="showSection('home')">← Back</button>
 </section>
 
-<!-- Wishlist -->
-<section class="booking-form section" id="wishlist">
+<section class="section" id="wishlist">
   <h2>Your Wishlist</h2>
   <ul id="wishlistItems">
-    <li>📱 Wireless Earbuds <button class="danger-btn" onclick="removeWishlistItem(this)">Remove</button></li>
-    <li>🌽 Maize Seeds <button class="danger-btn" onclick="removeWishlistItem(this)">Remove</button></li>
+    <li>📱 Wireless Earbuds <button onclick="removeWishlistItem(this)">Remove</button></li>
+    <li>🌽 Maize Seeds <button onclick="removeWishlistItem(this)">Remove</button></li>
   </ul>
   <button class="secondary-btn" onclick="showSection('home')">← Back</button>
 </section>
 
-<!-- Filter -->
-<section class="booking-form section" id="filter">
+<section class="section" id="rating">
+  <h2>Vendor Ratings</h2>
+  <p>5 ★ (80)</p>
+  <div style="width: 80%; background: #00d4a0; height: 10px;"></div>
+  <p>4 ★ (25)</p>
+  <div style="width: 25%; background: #00d4a0; height: 10px;"></div>
+  <button class="secondary-btn" onclick="showSection('home')">← Back</button>
+</section>
+
+<section class="section" id="filter">
   <h2>Filter by Category</h2>
   <select id="categoryFilter">
     <option value="all">All</option>
     <option value="electronics">Electronics</option>
     <option value="services">Services</option>
-    <option value="agriculture">Agriculture</option>
-    <option value="fashion">Fashion</option>
   </select>
-  <button class="primary-btn" onclick="filterCategory()">Apply Filter</button>
-  <div id="filterResults" style="margin-top:1rem;color:#ccc;"></div>
+  <button onclick="filterCategory()">Apply</button>
+  <div id="filterResults"></div>
   <button class="secondary-btn" onclick="showSection('home')">← Back</button>
 </section>
 
-<!-- Ratings -->
-<section class="vendor-rating-breakdown section" id="rating">
-  <h2>Vendor Ratings</h2>
-  <p>5 ★ (80)</p>
-  <div class="rating-bar"><div class="rating-fill" style="width: 80%"></div></div>
-  <p>4 ★ (25)</p>
-  <div class="rating-bar"><div class="rating-fill" style="width: 25%"></div></div>
-  <p>3 ★ (10)</p>
-  <div class="rating-bar"><div class="rating-fill" style="width: 10%"></div></div>
-  <p>2 ★ (3)</p>
-  <div class="rating-bar"><div class="rating-fill" style="width: 3%"></div></div>
-  <p>1 ★ (2)</p>
-  <div class="rating-bar"><div class="rating-fill" style="width: 2%"></div></div>
-  <button class="secondary-btn" onclick="showSection('home')">← Back</button>
-</section>
-
-<!-- Agriculture -->
-<section class="booking-form section" id="agriculture">
+<section class="section" id="agriculture">
   <h2>Agricultural Market</h2>
   <ul>
     <li>🌽 Maize Seeds – KSh 1,200</li>
     <li>🔧 Farming Tools – KSh 5,500</li>
-    <li>🥔 Potatoes (50kg) – KSh 3,000</li>
-    <li>🍅 Tomatoes (crate) – KSh 1,500</li>
-    <li>🚜 Plough Rental – KSh 7,000/day</li>
   </ul>
-  <button class="primary-btn">Sell Agricultural Product</button>
   <button class="secondary-btn" onclick="showSection('home')">← Back</button>
 </section>
 
-<!-- Notification -->
-<div id="notification-bell" style="position:fixed;top:1rem;right:1rem;background:#1e1e1e;padding:0.8rem 1.2rem;border-radius:10px;box-shadow:0 0 10px #00d4a0;color:#fff;font-size:0.9rem;z-index:999;">
-  🔔 You’ve received a new booking request
-</div>
-
-<!-- Chat -->
-<div id="chat-btn" onclick="toggleChat()" style="position:fixed;bottom:2rem;right:1rem;background:#00d4a0;color:#000;padding:0.8rem 1rem;border-radius:100px;cursor:pointer;font-weight:600;z-index:999;">
-  💬 Chat
-</div>
-<div id="chat-box" style="display:none;position:fixed;bottom:5rem;right:1rem;width:280px;background:#1a1a1a;color:#fff;padding:1rem;border-radius:12px;box-shadow:0 0 10px #00d4a0;z-index:999;">
-  <p><strong>Support:</strong> Hi there! How can we help you today?</p>
-  <textarea placeholder="Type your message..." style="width:100%;height:60px;border-radius:8px;margin-top:0.5rem;"></textarea>
-  <button class="primary-btn" style="margin-top:0.5rem;width:100%;">Send</button>
-</div>
-
 <script>
   function showSection(id) {
-    document.querySelectorAll('.section').forEach(section => section.classList.remove('active'));
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
     document.getElementById(id).classList.add('active');
   }
-  function toggleChat() {
-    const box = document.getElementById('chat-box');
-    box.style.display = box.style.display === 'none' ? 'block' : 'none';
-  }
+
   function placeOrder() {
-    const name = document.querySelector('#checkout input[placeholder="Full Name"]').value;
-    const address = document.querySelector('#checkout input[placeholder="Shipping Address"]').value;
-    const phone = document.querySelector('#checkout input[placeholder="Phone Number"]').value;
-    const message = document.getElementById('orderMessage');
-    if (!name || !address || !phone) {
-      message.style.color = '#ff4d4f';
-      message.textContent = '⚠️ Please fill out all fields.';
-    } else {
-      message.style.color = '#00d4a0';
-      message.textContent = '✅ Order placed successfully!';
-    }
+    document.getElementById('orderMessage').innerText = "✅ Order placed!";
   }
+
   function saveProfile() {
-    const name = document.getElementById('profileName').value;
-    const email = document.getElementById('profileEmail').value;
-    const type = document.getElementById('profileType').value;
-    const message = document.getElementById('profileMessage');
-    if (!name || !email) {
-      message.style.color = '#ff4d4f';
-      message.textContent = '⚠️ Please fill out all fields.';
-    } else {
-      message.style.color = '#00d4a0';
-      message.textContent = '✅ Profile updated successfully!';
-    }
+    document.getElementById('profileMessage').innerText = "✅ Profile saved!";
   }
+
   function removeWishlistItem(btn) {
     btn.closest('li').remove();
   }
+
   function filterCategory() {
-    const category = document.getElementById('categoryFilter').value;
-    const output = document.getElementById('filterResults');
-    const data = {
-      electronics: ['📱 Wireless Earbuds', '🎧 Headphones'],
-      services: ['💅 Nail Technician', '💇 Haircut Appointment'],
-      agriculture: ['🌽 Maize Seeds', '🍅 Tomatoes'],
-      fashion: ['👕 Graphic Tee', '👟 Sneakers']
-    };
-    if (category === 'all') {
-      output.innerHTML = '<ul>' + Object.values(data).flat().map(i => `<li>${i}</li>`).join('') + '</ul>';
-    } else {
-      output.innerHTML = '<ul>' + (data[category] || []).map(i => `<li>${i}</li>`).join('') + '</ul>';
-    }
-  }
-<script>
-  function showSection(id) {
-    document.querySelectorAll('.section').forEach(section => section.classList.remove('active'));
-    document.getElementById(id).classList.add('active');
+    const cat = document.getElementById('categoryFilter').value;
+    document.getElementById('filterResults').innerText = `Showing results for: ${cat}`;
   }
 </script>
+
 </body>
 </html>
