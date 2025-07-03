@@ -1,9 +1,9 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Swypa | Marketplace</title>
+  <link rel="stylesheet" href="style.css" />
   <style>
     body {
       background-color: #121212;
@@ -17,6 +17,11 @@
       margin-bottom: 1rem;
       border-bottom: 2px solid #00d4a0;
       padding-bottom: 0.5rem;
+    }
+    h3 {
+      font-size: 1.2rem;
+      margin-top: 2rem;
+      margin-bottom: 0.75rem;
     }
     .section {
       display: none;
@@ -39,14 +44,34 @@
       background-color: #00d4a0;
       color: #0f0f0f;
     }
+    .primary-btn:hover {
+      background-color: #00e5b2;
+      transform: translateY(-2px);
+    }
     .secondary-btn {
       background-color: #1e1e1e;
       color: #ffffff;
       border: 1px solid #444;
+      padding: 0.6rem 1.2rem;
+      border-radius: 10px;
+      font-weight: 500;
+      font-size: 0.95rem;
+      letter-spacing: 0.5px;
+      transition: all 0.3s ease;
+      margin-top: 1rem;
+    }
+    .secondary-btn:hover {
+      background-color: #2a2a2a;
+      color: #00d4a0;
+      border-color: #00d4a0;
+      transform: translateY(-1px);
     }
     .danger-btn {
       background-color: #ff4d4f;
       color: #fff;
+    }
+    .danger-btn:hover {
+      background-color: #ff6668;
     }
     input, select, textarea {
       width: 100%;
@@ -58,106 +83,312 @@
       background: #1e1e1e;
       color: #f0f0f0;
     }
+    input:focus, select:focus, textarea:focus {
+      outline: 2px solid #00d4a0;
+    }
+    ul {
+      padding-left: 1.2rem;
+    }
+    ul li {
+      margin-bottom: 0.75rem;
+    }
+    label {
+      display: block;
+      margin-bottom: 0.25rem;
+      font-weight: 600;
+      color: #cccccc;
+    }
+    .booking-form, .delivery-form, .checkout-form {
+      background-color: #1a1a1a;
+      padding: 2rem;
+      border-radius: 12px;
+      max-width: 600px;
+      margin: 2rem auto;
+    }
+    @media screen and (max-width: 600px) {
+      .booking-form, .delivery-form, .checkout-form {
+        padding: 1.2rem;
+      }
+      h2 {
+        font-size: 1.5rem;
+      }
+    }
   </style>
 </head>
 <body>
+  <!-- Home Section -->
+  <section class="section active" id="home">
+    <h2>Welcome to Swypa</h2>
+    <p>Scroll to discover hot deals, local services, and more.</p>
+    <button class="primary-btn" onclick="showSection('checkout')">Checkout</button>
+    <button class="primary-btn" onclick="showSection('profile')">Profile</button>
+    <button class="primary-btn" onclick="showSection('wishlist')">Wishlist</button>
+    <button class="primary-btn" onclick="showSection('rating')">Vendor Rating</button>
+    <button class="primary-btn" onclick="showSection('filter')">Category Filter</button>
+    <button class="primary-btn" onclick="showSection('agriculture')">Agri-Market</button>
+  </section>
 
-<section class="section active" id="home">
-  <h2>Welcome to Swypa</h2>
-  <p>Scroll to discover hot deals, local services, and more.</p>
-  <button class="primary-btn" onclick="showSection('checkout')">Checkout</button>
-  <button class="primary-btn" onclick="showSection('profile')">Profile</button>
-  <button class="primary-btn" onclick="showSection('wishlist')">Wishlist</button>
-  <button class="primary-btn" onclick="showSection('rating')">Vendor Rating</button>
-  <button class="primary-btn" onclick="showSection('filter')">Category Filter</button>
-  <button class="primary-btn" onclick="showSection('agriculture')">Agri-Market</button>
-</section>
+  <!-- Top Nav with Profile Icon & Cart -->
+  <div style="position: fixed; top: 1rem; right: 1rem; display: flex; gap: 1rem; align-items: center; z-index: 999;">
+    <button onclick="showCart()" class="primary-btn" style="border-radius: 50%; width: 40px; height: 40px;">🛒</button>
+    <img src="https://i.pravatar.cc/40" onclick="showSection('profile')" style="width:40px;height:40px;border-radius:50%;cursor:pointer;border:2px solid #00d4a0;" title="Profile" />
+  </div>
 
-<section class="section" id="checkout">
-  <h2>Checkout</h2>
-  <input type="text" placeholder="Full Name">
-  <input type="text" placeholder="Shipping Address">
-  <input type="text" placeholder="Phone Number">
-  <button class="primary-btn" onclick="placeOrder()">Place Order</button>
-  <div id="orderMessage"></div>
+  <!-- Listings Grid -->
+  <section class="section" id="listings">
+    <h2 style="text-align:center;">Featured Listings</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:1.5rem;padding:1rem;">
+      <div style="background:#1a1a1a;padding:1rem;border-radius:12px;">
+        <img src="https://images.unsplash.com/photo-1606813902734-6271e962e4a7" alt="Sneakers" style="width:100%;border-radius:8px;">
+        <h3>🔥 Street Sneakers</h3>
+        <p>Vendor: TrendyKicks</p>
+        <p>Rating: ⭐⭐⭐⭐☆ (4.2)</p>
+        <button class="primary-btn" onclick="addToCart('Sneakers')">Add to Cart</button>
+        <button class="secondary-btn" onclick="viewVendor('TrendyKicks')">View Vendor</button>
+      </div>
+      <div style="background:#1a1a1a;padding:1rem;border-radius:12px;">
+        <img src="https://images.unsplash.com/photo-1580910051073-b7e396a7ff04" alt="Mangoes" style="width:100%;border-radius:8px;">
+        <h3>🥭 Bulk Mangoes - 50kg</h3>
+        <p>Vendor: AgriWholesalers</p>
+        <p>Rating: ⭐⭐⭐⭐⭐ (4.9)</p>
+        <button class="primary-btn" onclick="addToCart('Mangoes')">Add to Cart</button>
+        <button class="secondary-btn" onclick="viewVendor('AgriWholesalers')">View Vendor</button>
+      </div>
+      <div style="background:#1a1a1a;padding:1rem;border-radius:12px;">
+        <img src="https://images.unsplash.com/photo-1616627989399-7453bbbc3e3c" alt="Earbuds" style="width:100%;border-radius:8px;">
+        <h3>🎧 Wireless Earbuds</h3>
+        <p>Vendor: GadgetStore254</p>
+        <p>Rating: ⭐⭐⭐☆ (3.8)</p>
+        <button class="primary-btn" onclick="addToCart('Earbuds')">Add to Cart</button>
+        <button class="secondary-btn" onclick="viewVendor('GadgetStore254')">View Vendor</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Checkout Section (Hidden until cart has items) -->
+  <section class="checkout-form section" id="checkout" style="display:none;">
+    <h2>Checkout</h2>
+    <p>Your cart: <span id="cartItems"></span></p>
+    <input type="text" placeholder="Full Name">
+    <input type="text" placeholder="Shipping Address">
+    <input type="text" placeholder="Phone Number">
+    <button class="primary-btn" onclick="placeOrder()">Place Order</button>
+    <div id="orderMessage"></div>
+    <button class="secondary-btn" onclick="hideCheckout()">← Back</button>
+  </section>
+  <!-- Delivery Booking -->
+<section class="delivery-form section" id="delivery">
+  <h2>Arrange Delivery</h2>
+  <label for="pickup">Pickup Location</label>
+  <input type="text" id="pickup" placeholder="e.g. Nairobi CBD" />
+
+  <label for="dropoff">Drop-off Location</label>
+  <input type="text" id="dropoff" placeholder="e.g. Mombasa" />
+
+  <label for="date">Preferred Date</label>
+  <input type="date" id="date" />
+
+  <label for="instructions">Special Instructions</label>
+  <textarea id="instructions" rows="3" placeholder="e.g. Call before arriving..."></textarea>
+
+  <button class="primary-btn" onclick="confirmDelivery()">Book Delivery</button>
+  <div id="deliveryMessage" style="margin-top:1rem;"></div>
   <button class="secondary-btn" onclick="showSection('home')">← Back</button>
 </section>
-
+  <!-- Profile Section -->
 <section class="section" id="profile">
   <h2>Your Profile</h2>
-  <input type="text" id="profileName" placeholder="Name">
-  <input type="email" id="profileEmail" placeholder="Email">
-  <select id="profileType">
-    <option value="Vendor">Vendor</option>
-    <option value="Customer">Customer</option>
-  </select>
-  <button class="primary-btn" onclick="saveProfile()">Save</button>
-  <div id="profileMessage"></div>
-  <button class="secondary-btn" onclick="showSection('home')">← Back</button>
-</section>
-
+  <div style="display:flex;align-items:center;gap:1rem;margin-bottom:1rem;">
+    <img src="https://i.pravatar.cc/80" style="border-radius:50%;border:2px solid #00d4a0;" />
+    <div>
+      <p><strong>Name:</strong> Alex Mwangi</p>
+      <p><strong>Email:</strong> alex@swypa.co.ke</p>
+      <p><strong>Role:</strong> Vendor</p>
+    </div>
+  </div>
+  <!-- Wishlist Section -->
 <section class="section" id="wishlist">
   <h2>Your Wishlist</h2>
-  <ul id="wishlistItems">
-    <li>📱 Wireless Earbuds <button onclick="removeWishlistItem(this)">Remove</button></li>
-    <li>🌽 Maize Seeds <button onclick="removeWishlistItem(this)">Remove</button></li>
-  </ul>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1rem;">
+    <div style="background:#1e1e1e;padding:1rem;border-radius:10px;">
+      <img src="https://images.unsplash.com/photo-1616627989399-7453bbbc3e3c" style="width:100%;border-radius:8px;">
+      <h3>🎧 Wireless Earbuds</h3>
+      <button class="danger-btn" onclick="removeWishlistItem(this)">Remove</button>
+    </div>
+    <div style="background:#1e1e1e;padding:1rem;border-radius:10px;">
+      <img src="https://images.unsplash.com/photo-1580910051073-b7e396a7ff04" style="width:100%;border-radius:8px;">
+      <h3>🥭 Mangoes Bulk</h3>
+      <button class="danger-btn" onclick="removeWishlistItem(this)">Remove</button>
+    </div>
+  </div>
   <button class="secondary-btn" onclick="showSection('home')">← Back</button>
 </section>
-
-<section class="section" id="rating">
-  <h2>Vendor Ratings</h2>
-  <p>5 ★ (80)</p>
-  <div style="width: 80%; background: #00d4a0; height: 10px;"></div>
-  <p>4 ★ (25)</p>
-  <div style="width: 25%; background: #00d4a0; height: 10px;"></div>
-  <button class="secondary-btn" onclick="showSection('home')">← Back</button>
-</section>
-
+  <!-- Category Filter Section -->
 <section class="section" id="filter">
   <h2>Filter by Category</h2>
   <select id="categoryFilter">
     <option value="all">All</option>
     <option value="electronics">Electronics</option>
+    <option value="fashion">Fashion</option>
     <option value="services">Services</option>
+    <option value="agriculture">Agriculture</option>
+    <option value="wholesaler">Wholesaler</option>
   </select>
-  <button onclick="filterCategory()">Apply</button>
-  <div id="filterResults"></div>
+  <button class="primary-btn" onclick="filterCategory()">Apply</button>
+  <div id="filterResults" style="margin-top:1rem;"></div>
   <button class="secondary-btn" onclick="showSection('home')">← Back</button>
 </section>
-
-<section class="section" id="agriculture">
-  <h2>Agricultural Market</h2>
+  <h3>Recent Activity</h3>
   <ul>
-    <li>🌽 Maize Seeds – KSh 1,200</li>
-    <li>🔧 Farming Tools – KSh 5,500</li>
+    <li>✅ Added "Wireless Earbuds" listing</li>
+    <li>⭐ Reviewed "TrendyKicks"</li>
+    <li>📦 Order placed - ID #SWP2394</li>
   </ul>
   <button class="secondary-btn" onclick="showSection('home')">← Back</button>
 </section>
+<!-- Vendor Profile Page -->
+<section class="section" id="vendorPage">
+  <h2 id="vendorName">Vendor Name</h2>
+  <p id="vendorCategory">Category: </p>
+  <p>Rating: <span id="vendorRating">⭐⭐⭐⭐☆ (4.3)</span></p>
+  <h3>Customer Reviews</h3>
+<ul id="vendorReviews">
+  <li>✅ <strong>Verified Buyer:</strong> “Fast delivery and good packaging!”</li>
+  <li>✅ <strong>Verified Buyer:</strong> “Exactly as described. Will order again.”</li>
+  <li>✅ <strong>Verified Buyer:</strong> “Seller was polite and gave discount.”</li>
+</ul>
+<p style="font-size:0.9rem;color:#aaa;margin-top:1rem;">*Only verified customers can leave reviews</p>
+  <button class="secondary-btn" onclick="showSection('home')">← Back to Listings</button>
+</section>
+<!-- Seller Verification -->
+<section class="section" id="verifySeller">
+  <h2>Seller Verification</h2>
+  <p>We use this info to protect buyers and promote legit sellers. No license? No problem — Swypa supports youth & small hustlers too.</p>
+  <label for="bizName">Business Name (or nickname):</label>
+  <input type="text" id="bizName" placeholder="e.g. HustlePlug254" />
+  
+  <label for="bizID">Business ID or Type (if any):</label>
+  <input type="text" id="bizID" placeholder="Optional" />
+  
+  <label for="description">What do you sell?</label>
+  <textarea id="description" rows="4" placeholder="Briefly describe your business..."></textarea>
+  
+  <button class="primary-btn" onclick="submitVerification()">Submit</button>
+  <div id="verifyMessage" style="margin-top:1rem;"></div>
+  <button class="secondary-btn" onclick="showSection('home')">← Back</button>
+</section>
 
-<script>
-  function showSection(id) {
-    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-    document.getElementById(id).classList.add('active');
+  <!-- Scripts -->
+  <script>
+    let cart = [];
+
+    function showSection(id) {
+      document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+    }
+
+    function addToCart(item) {
+      cart.push(item);
+      alert(item + ' added to cart.');
+      document.getElementById('checkout').style.display = 'block';
+      document.getElementById('cartItems').textContent = cart.join(', ');
+    }
+
+    function placeOrder() {
+      document.getElementById('orderMessage').innerText = '✅ Order placed!';
+      cart = [];
+      document.getElementById('cartItems').textContent = '';
+    }
+
+    function hideCheckout() {
+      document.getElementById('checkout').style.display = 'none';
+    }
+
+    function showCart() {
+      if (cart.length === 0) {
+        alert('🛒 Cart is empty. Add items first.');
+      } else {
+        document.getElementById('checkout').style.display = 'block';
+        showSection('checkout');
+      }
+    }
+
+function viewVendor(name) {
+  const vendors = {
+    "TrendyKicks": {
+      category: "Fashion",
+      rating: "⭐⭐⭐⭐☆ (4.2)",
+      reviews: ["🔥 “Stylish kicks, just like the photo.”", "💯 “Good fit and arrived quick.”"]
+    },
+    "AgriWholesalers": {
+      category: "Wholesaler - Agriculture",
+      rating: "⭐⭐⭐⭐⭐ (4.9)",
+      reviews: ["🥭 “Sweetest mangoes I've ever had.”", "🚚 “Bulk delivery came next day.”"]
+    },
+    "GadgetStore254": {
+      category: "Electronics",
+      rating: "⭐⭐⭐☆ (3.8)",
+      reviews: ["🎧 “Sound is okay, packaging was basic.”", "😐 “Came late, but works fine.”"]
+    }
+  };
+
+  const vendor = vendors[name];
+  if (vendor) {
+    document.getElementById('vendorName').textContent = name;
+    document.getElementById('vendorCategory').textContent = 'Category: ' + vendor.category;
+    document.getElementById('vendorRating').textContent = vendor.rating;
+
+    const reviewList = document.getElementById('vendorReviews');
+    reviewList.innerHTML = vendor.reviews.map(r => `<li>${r}</li>`).join('');
+    showSection('vendorPage');
+  } else {
+    alert('Vendor info not found.');
   }
+}
+function filterCategory() {
+  const category = document.getElementById('categoryFilter').value;
+  const listings = {
+    electronics: ['🎧 Wireless Earbuds', '📱 Smartwatch'],
+    fashion: ['🔥 Street Sneakers', '🧢 Cap'],
+    services: ['💇 Haircut Appointment', '💅 Nail Session'],
+    agriculture: ['🥭 Mangoes Bulk', '🌽 Maize Seeds'],
+    wholesaler: ['🚜 Plough Rental', '🥔 Potatoes (100kg)']
+  };
 
-  function placeOrder() {
-    document.getElementById('orderMessage').innerText = "✅ Order placed!";
+  const output = document.getElementById('filterResults');
+  if (category === 'all') {
+    output.innerHTML = Object.values(listings)
+      .flat()
+      .map(item => `<li>${item}</li>`)
+      .join('');
+  } else {
+    const items = listings[category] || [];
+    output.innerHTML = items.length
+      ? items.map(i => `<li>${i}</li>`).join('')
+      : '<em>No items in this category.</em>';
   }
+}
+    }
+    function submitVerification() {
+  const name = document.getElementById('bizName').value;
+  const desc = document.getElementById('description').value;
 
-  function saveProfile() {
-    document.getElementById('profileMessage').innerText = "✅ Profile saved!";
+  if (name && desc) {
+    document.getElementById('verifyMessage').innerText = "✅ Submitted! We'll review and verify your account soon.";
+  } else {
+    document.getElementById('verifyMessage').innerText = "❗ Please fill in the required fields.";
   }
+}
+    function confirmDelivery() {
+  const pickup = document.getElementById('pickup').value;
+  const dropoff = document.getElementById('dropoff').value;
 
-  function removeWishlistItem(btn) {
-    btn.closest('li').remove();
+  if (pickup && dropoff) {
+    document.getElementById('deliveryMessage').innerText = "✅ Delivery booked!";
+  } else {
+    document.getElementById('deliveryMessage').innerText = "❗ Fill all required fields.";
   }
-
-  function filterCategory() {
-    const cat = document.getElementById('categoryFilter').value;
-    document.getElementById('filterResults').innerText = `Showing results for: ${cat}`;
-  }
-</script>
-
+}
+  </script>
 </body>
 </html>
