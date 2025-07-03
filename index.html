@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -12,136 +13,142 @@
       color: #f0f0f0;
       margin: 0;
       padding: 0;
-      scroll-behavior: smooth;
+    }
+    nav {
+      background: #1f1f1f;
+      padding: 1rem;
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      border-bottom: 1px solid #2a2a2a;
+    }
+    nav button {
+      background: #00d4a0;
+      border: none;
+      padding: 0.6rem 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background 0.2s ease;
+    }
+    nav button:hover {
+      background: #00e5b2;
     }
     h2 {
       font-size: 1.8rem;
       margin-bottom: 1rem;
       border-bottom: 2px solid #00d4a0;
       padding-bottom: 0.5rem;
-      animation: fadeInDown 0.6s ease-in-out;
-    }
-    h3 {
-      font-size: 1.2rem;
-      margin-top: 2rem;
-      margin-bottom: 0.75rem;
     }
     .section {
       display: none;
       padding: 2rem 1rem;
-      animation: fadeIn 0.5s ease-in-out;
     }
     .section.active {
       display: block;
     }
-    button {
-      padding: 0.75rem 1.4rem;
-      border: none;
-      border-radius: 12px;
-      font-weight: 600;
-      cursor: pointer;
-      font-size: 1rem;
-      transition: all 0.3s ease;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.3);
-    }
-    .primary-btn {
-      background-color: #00d4a0;
-      color: #0f0f0f;
-      transition: background-color 0.3s ease, transform 0.2s ease;
-    }
-    .primary-btn:hover {
-      background-color: #00e5b2;
-      transform: translateY(-2px);
-    }
-    .secondary-btn {
-      background-color: #1e1e1e;
-      color: #ffffff;
-      border: 1px solid #444;
-      padding: 0.6rem 1.2rem;
+    .listing-preview {
+      background: #1a1a1a;
       border-radius: 10px;
-      font-weight: 500;
-      font-size: 0.95rem;
-      letter-spacing: 0.5px;
-      transition: all 0.3s ease;
-      margin-top: 1rem;
+      padding: 1rem;
+      margin: 1rem 0;
     }
-    .secondary-btn:hover {
-      background-color: #2a2a2a;
-      color: #00d4a0;
-      border-color: #00d4a0;
-      transform: translateY(-1px);
-    }
-    .danger-btn {
-      background-color: #ff4d4f;
-      color: #fff;
-      transition: background-color 0.3s ease;
-    }
-    .danger-btn:hover {
-      background-color: #ff6668;
-    }
-    input, select, textarea {
-      width: 100%;
-      margin-bottom: 1rem;
-      padding: 0.75rem;
-      border: none;
+    .listing-preview img {
+      max-width: 100%;
       border-radius: 8px;
-      font-size: 1rem;
-      background: #1e1e1e;
-      color: #f0f0f0;
-      transition: outline 0.3s ease;
     }
-    input:focus, select:focus, textarea:focus {
-      outline: 2px solid #00d4a0;
-    }
-    ul {
-      padding-left: 1.2rem;
-    }
-    ul li {
-      margin-bottom: 0.75rem;
-      animation: fadeInUp 0.4s ease-in-out;
-    }
-    label {
-      display: block;
-      margin-bottom: 0.25rem;
-      font-weight: 600;
-      color: #cccccc;
-    }
-    .booking-form, .delivery-form, .checkout-form {
-      background-color: #1a1a1a;
-      padding: 2rem;
-      border-radius: 12px;
-      max-width: 600px;
-      margin: 2rem auto;
-      animation: slideInUp 0.5s ease-in-out;
-    }
-    @media screen and (max-width: 600px) {
-      .booking-form, .delivery-form, .checkout-form {
-        padding: 1.2rem;
-      }
-      h2 {
-        font-size: 1.5rem;
-      }
-    }
-
-    @keyframes fadeIn {
-      from {opacity: 0;}
-      to {opacity: 1;}
-    }
-    @keyframes fadeInDown {
-      from {opacity: 0; transform: translateY(-20px);}
-      to {opacity: 1; transform: translateY(0);}
-    }
-    @keyframes fadeInUp {
-      from {opacity: 0; transform: translateY(20px);}
-      to {opacity: 1; transform: translateY(0);}
-    }
-    @keyframes slideInUp {
-      from {opacity: 0; transform: translateY(40px);}
-      to {opacity: 1; transform: translateY(0);}
+    .listing-preview h3, .listing-preview p {
+      margin: 0.5rem 0;
     }
   </style>
+  <script>
+    function showSection(id) {
+      document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+    }
+  </script>
 </head>
 <body>
+  <nav>
+    <button onclick="showSection('home')">🏠 Home</button>
+    <button onclick="showSection('checkout')">🛒 Checkout</button>
+    <button onclick="showSection('profile')">👤 Profile</button>
+    <button onclick="showSection('wishlist')">💖 Wishlist</button>
+    <button onclick="showSection('rating')">⭐ Ratings</button>
+    <button onclick="showSection('filter')">📂 Categories</button>
+    <button onclick="showSection('agriculture')">🌿 Agriculture</button>
+    <button onclick="showSection('verifySeller')">✅ Verify Seller</button>
+    <button onclick="showSection('delivery')">🚚 Delivery</button>
+  </nav>
+
+  <section class="section active" id="home">
+    <h2>🔥 Sponsored Products</h2>
+    <div class="listing-preview">
+      <img src="https://images.unsplash.com/photo-1598970434795-0c54fe7c0642" alt="Phone" />
+      <h3>📱 Budget Smartphone - Ksh 7,999</h3>
+      <p>Vendor: SmartTech KE</p>
+      <p>Rating: ⭐⭐⭐⭐☆ (4.4)</p>
+    </div>
+    <div class="listing-preview">
+      <img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f" alt="Grill" />
+      <h3>🍖 Portable BBQ Grill</h3>
+      <p>Vendor: BackyardKing</p>
+      <p>Rating: ⭐⭐⭐⭐☆ (4.5)</p>
+    </div>
+    <div class="listing-preview">
+      <img src="https://images.unsplash.com/photo-1602524207343-bbf47b7f87a3" alt="Rose Toy" />
+      <h3>🌹 Rose Toy - Adult Collection</h3>
+      <p>Vendor: Intimacy Hub</p>
+      <p>Rating: ⭐⭐⭐⭐⭐ (5.0)</p>
+    </div>
+  </section>
+
+  <section class="section" id="checkout">
+    <h2>Checkout</h2>
+    <p>Your cart is empty for now.</p>
+  </section>
+
+  <section class="section" id="profile">
+    <h2>Your Profile</h2>
+    <p>Name: Alex Mwangi</p>
+    <p>Email: alex@swypa.co.ke</p>
+    <p>Role: Vendor</p>
+  </section>
+
+  <section class="section" id="wishlist">
+    <h2>Your Wishlist</h2>
+    <p>No items yet.</p>
+  </section>
+
+  <section class="section" id="rating">
+    <h2>Vendor Ratings</h2>
+    <p>Coming soon...</p>
+  </section>
+
+  <section class="section" id="filter">
+    <h2>Category Filter</h2>
+    <p>Pick a category from the filter UI (not implemented here yet).</p>
+  </section>
+
+  <section class="section" id="agriculture">
+    <h2>Agricultural Market</h2>
+    <p>List seeds, tools, or fresh produce here.</p>
+  </section>
+
+  <section class="section" id="verifySeller">
+    <h2>Verify Seller</h2>
+    <p>Business details go here.</p>
+  </section>
+
+  <section class="section" id="delivery">
+    <h2>Delivery Booking</h2>
+    <p>Enter pickup and drop-off info.</p>
+  </section>
+</body>
+
   <!-- Home Section -->
   <section class="section active" id="home">
     <h2>Welcome to Swypa</h2>
