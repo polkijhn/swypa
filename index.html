@@ -3,7 +3,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Swypa | Marketplace</title>
-  <link rel="stylesheet" href="style.css" />
   <style>
     body {
       background-color: #121212;
@@ -116,8 +115,17 @@
   </style>
 </head>
 <body>
-<!-- Checkout -->
-<section class="checkout-form section" id="checkout">
+
+  <section class="section active" id="home">
+    <h2>Welcome to Swypa</h2>
+    <p>Scroll to discover hot deals, local services, and more.</p>
+    <button class="primary-btn" onclick="showSection('checkout')">Checkout</button>
+    <button class="primary-btn" onclick="showSection('profile')">Profile</button>
+    <button class="primary-btn" onclick="showSection('wishlist')">Wishlist</button>
+    <button class="primary-btn" onclick="showSection('rating')">Vendor Rating</button>
+    <button class="primary-btn" onclick="showSection('filter')">Category Filter</button>
+    <button class="primary-btn" onclick="showSection('agriculture')">Agri-Market</button>
+ <section class="checkout-form section" id="checkout">
   <h2>Checkout</h2>
   <input type="text" placeholder="Full Name">
   <input type="text" placeholder="Shipping Address">
@@ -230,9 +238,9 @@
     box.style.display = box.style.display === 'none' ? 'block' : 'none';
   }
   function placeOrder() {
-    const name = document.querySelector('#checkout input[placeholder=\"Full Name\"]').value;
-    const address = document.querySelector('#checkout input[placeholder=\"Shipping Address\"]').value;
-    const phone = document.querySelector('#checkout input[placeholder=\"Phone Number\"]').value;
+    const name = document.querySelector('#checkout input[placeholder="Full Name"]').value;
+    const address = document.querySelector('#checkout input[placeholder="Shipping Address"]').value;
+    const phone = document.querySelector('#checkout input[placeholder="Phone Number"]').value;
     const message = document.getElementById('orderMessage');
     if (!name || !address || !phone) {
       message.style.color = '#ff4d4f';
@@ -273,7 +281,11 @@
       output.innerHTML = '<ul>' + (data[category] || []).map(i => `<li>${i}</li>`).join('') + '</ul>';
     }
   }
+<script>
+  function showSection(id) {
+    document.querySelectorAll('.section').forEach(section => section.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+  }
 </script>
-
 </body>
 </html>
